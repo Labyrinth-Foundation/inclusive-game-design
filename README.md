@@ -17,11 +17,13 @@ Start here:
 - [Accessible Touch Interactions](guides/accessible-touch.md)
 - [Quick Accessibility Tests](testing/quick-accessibility-tests.md)
 - [Before You Release](checklists/before-you-release.md)
+- [SwiftUI Reduced Motion Example](examples/swiftui/reduced-motion/)
+- [Godot Reduced Motion Example](examples/godot/reduced-motion/)
 - [Contributing](CONTRIBUTING.md)
 
 The first release intentionally stays small. We would rather publish a few practical resources grounded in real development and primary guidance than fill the repository with placeholder material.
 
-Over time, we plan to add small reference implementations for SwiftUI, the web, and Godot, along with additional guides and case studies.
+The repository also includes small reference implementations for SwiftUI and Godot. Over time, we plan to add additional platforms, guides, testing methods, and case studies.
 
 ## Principles
 
@@ -62,7 +64,7 @@ As the project grows, individual guides will cite the standards, platform docume
 
 ## Contributing
 
-We welcome thoughtful contributions from players, developers, designers, researchers, educators, and accessibility practitioners.
+We welcome thoughtful contributions from players, developers, designers, researchers, educators, accessibility practitioners, and people who use assistive technologies.
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md) for the principles we use when proposing guidance, examples, testing methods, corrections, and new platform coverage.
 
