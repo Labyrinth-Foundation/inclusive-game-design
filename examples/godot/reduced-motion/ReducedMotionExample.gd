@@ -14,12 +14,14 @@ var cards := [
 	"Reflect",
 ]
 
+var card_stage: Control
 var card_label: Label
-var motion_toggle: CheckButton
+var status_label: Label
 
 
 func _ready() -> void:
 	var root := VBoxContainer.new()
+	root.name = "Layout"
 	root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	root.add_theme_constant_override("separation", 24)
 	root.offset_left = 32
@@ -33,32 +35,34 @@ func _ready() -> void:
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	root.add_child(title)
 
-	var card_container := CenterContainer.new()
-	card_container.custom_minimum_size = Vector2(0, 180)
-	card_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	root.add_child(card_container)
+	card_stage = Control.new()
+	card_stage.custom_minimum_size = Vector2(0, 180)
+	card_stage.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	root.add_child(card_stage)
 
 	card_label = Label.new()
 	card_label.text = cards[card_index]
 	card_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	card_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	card_label.add_theme_font_size_override("font_size", 36)
-	card_container.add_child(card_label)
+	card_label.set_anchors_preset(Control.PRESET_CENTER)
+	card_label.position = Vector2(-90, -30)
+	card_label.size = Vector2(180, 60)
+	card_stage.add_child(card_label)
 
 	var next_button := Button.new()
 	next_button.text = "Next card"
 	next_button.pressed.connect(_show_next_card)
 	root.add_child(next_button)
 
-	motion_toggle = CheckButton.new()
+	var motion_toggle := CheckButton.new()
 	motion_toggle.text = "Reduce motion"
 	motion_toggle.toggled.connect(_set_reduce_motion)
 	root.add_child(motion_toggle)
 
-	var status := Label.new()
-	status.name = "Status"
-	status.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	root.add_child(status)
+	status_label = Label.new()
+	status_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	root.add_child(status_label)
 
 	_update_status()
 
@@ -120,11 +124,7 @@ func _slide_to_card(next_text: String) -> void:
 
 
 func _update_status() -> void:
-	var status := get_node("VBoxContainer/Status") as Label
-	if status == null:
-		return
-
-	status.text = (
+	status_label.text = (
 		"Reduced motion is on"
 		if reduce_motion
 		else "Reduced motion is off"
